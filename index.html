@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JewelFX Studio — Virtual Jewellery Try-On</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">✦</span><span>Jewel<span>FX</span><small>VIRTUAL TRY-ON STUDIO</small></span></a>
+  <div class="top-actions"><span class="live-dot"></span><span id="statusText">Camera not started</span><button id="helpBtn" class="icon-btn" title="Help">?</button></div>
+</header>
+<main class="layout">
+  <section class="stage-column">
+    <div class="stage-heading"><div><p class="eyebrow">REAL-TIME AR EXPERIENCE</p><h1>Your look, <em>reimagined.</em></h1><p class="subheading">Try on jewellery virtually using your camera.</p></div><span class="pill"><span class="live-dot"></span> LIVE STUDIO</span></div>
+    <div class="stage" id="stage">
+      <video id="video" playsinline autoplay muted></video>
+      <canvas id="overlay"></canvas>
+      <div class="stage-empty" id="emptyState"><div class="camera-icon">◎</div><h2>Ready when you are</h2><p>Start your camera to begin your virtual try-on.</p><button id="startBtn" class="primary-btn">◉ &nbsp; Start camera</button><small>Your camera feed stays in your browser.</small></div>
+      <div class="stage-top"><span class="stage-tag"><span class="live-dot"></span> LIVE PREVIEW</span><span id="fpsLabel" class="stage-tag">-- FPS</span></div>
+      <div class="stage-bottom"><span id="faceLabel">Face tracking: waiting</span><div class="stage-controls"><button id="flipBtn" class="round-btn" title="Mirror view">↔</button><button id="captureBtn" class="round-btn" title="Capture photo" disabled>◎</button><button id="recordBtn" class="round-btn" title="Record video" disabled>●</button></div></div>
+    </div>
+    <div class="stage-foot"><span><span class="shield">◇</span> Processing runs locally in your browser</span><span id="captureMessage">Choose a filter to get started</span></div>
+  </section>
+  <aside class="panel">
+    <div class="panel-head"><div><p class="eyebrow">PERSONALISE YOUR LOOK</p><h2>Jewellery studio</h2></div><button id="resetBtn" class="text-btn">Reset</button></div>
+    <div class="section-label">CHOOSE YOUR PIECES <span>04 FILTERS</span></div>
+    <div class="jewel-grid">
+      <button class="jewel-card selected" data-piece="earrings"><span class="jewel-art earrings-art">♢</span><span><b>Jhumka</b><small>Earrings</small></span><span class="toggle on"></span></button>
+      <button class="jewel-card selected" data-piece="necklace"><span class="jewel-art necklace-art">◡</span><span><b>Rani Haar</b><small>Necklace</small></span><span class="toggle on"></span></button>
+      <button class="jewel-card selected" data-piece="noseRing"><span class="jewel-art nose-art">◌</span><span><b>Nath</b><small>Nose ring</small></span><span class="toggle on"></span></button>
+      <button class="jewel-card selected" data-piece="tikka"><span class="jewel-art tikka-art">✧</span><span><b>Maang Tikka</b><small>Forehead</small></span><span class="toggle on"></span></button>
+    </div>
+    <div class="rule"></div>
+    <div class="control-row"><div><h3>Metal finish</h3><p>Choose your signature tone</p></div></div>
+    <div class="metal-options"><button class="metal selected" data-metal="gold"><i class="gold"></i>Gold</button><button class="metal" data-metal="silver"><i class="silver"></i>Silver</button><button class="metal" data-metal="rose"><i class="rose"></i>Rose gold</button></div>
+    <div class="rule"></div>
+    <div class="slider-block"><div class="slider-title"><label for="sizeSlider">Jewellery size</label><output id="sizeValue">100%</output></div><input id="sizeSlider" type="range" min="65" max="140" value="100"></div>
+    <div class="slider-block"><div class="slider-title"><label for="smoothSlider">Tracking smoothness</label><output id="smoothValue">65%</output></div><input id="smoothSlider" type="range" min="0" max="90" value="65"></div>
+    <div class="rule"></div>
+    <div class="metrics"><div><span class="metric-icon">◉</span><div><small>FACE TRACKING</small><b id="trackingMetric">Stand by</b></div></div><div><span class="metric-icon">⌁</span><div><small>RENDER SPEED</small><b id="renderMetric">-- ms / frame</b></div></div></div>
+    <button id="stopBtn" class="secondary-btn" disabled>Stop camera</button>
+    <p class="disclaimer">For a visual preview only. Jewellery placement is an approximation and may vary with lighting, pose and camera quality.</p>
+  </aside>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<div class="modal hidden" id="helpModal"><div class="modal-card"><button id="closeHelp" class="modal-close">×</button><p class="eyebrow">QUICK GUIDE</p><h2>How to use JewelFX</h2><ol><li>Click <b>Start camera</b> and allow browser camera permission.</li><li>Face the camera in even, bright lighting.</li><li>Switch jewellery pieces on or off and choose a metal finish.</li><li>Use the size slider to adjust the overlays.</li><li>Capture a photo or record a short video.</li></ol><p>Face tracking downloads a small MediaPipe model from Google's hosting on first use, so internet access is needed.</p><button id="closeHelp2" class="primary-btn">Got it</button></div></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
